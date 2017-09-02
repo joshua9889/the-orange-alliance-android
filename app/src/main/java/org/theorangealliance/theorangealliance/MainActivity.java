@@ -1,6 +1,8 @@
 package org.theorangealliance.theorangealliance;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private Intent team_intent;
     private Intent event_intent;
     private Intent settings_intent;
+    TextView output;
+    SharedPreferences API_settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        output = (TextView)findViewById(R.id.Output);
+        API_settings = this.getSharedPreferences("APIsettings" , Context.MODE_PRIVATE);
+        output.setText(
+            API_settings.getString("X_APP_NAME", null) + "\n" +
+            API_settings.getString("X_TOA_KEY", null) + "\n" +
+            API_settings.getString("Server", ""));
 
         team_intent = new Intent(this, TeamActivity.class);
         event_intent = new Intent(this, EventActivity.class);
