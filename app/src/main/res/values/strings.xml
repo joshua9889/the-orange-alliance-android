@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">The Orange Alliance</string>
-    <string name="team_search">Search for Team</string>
-    <string name="action_settings">Write File</string>
-    <string name="read">Read File</string>
+    <string name="menu_team">Teams</string>
+    <string name="menu_events">Events</string>
+    <string name="menu_settings">Settings</string>
+    <string name="activity_team">Teams</string>
+    <string name="activity_events">Events</string>
+    <string name="activity_setting">Settings</string>
 </resources>

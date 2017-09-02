@@ -1,10 +1,6 @@
 package org.theorangealliance.theorangealliance.Api;
 
 import android.util.Log;
-import android.widget.TextView;
-
-import org.theorangealliance.theorangealliance.R;
-
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
@@ -16,8 +12,10 @@ import okhttp3.Response;
  */
 
 public class ApiRequests {
-    String Response;
-    public void pull_request(final String url, final TextView output){
+    private String Response;
+    private boolean isFinished;
+    public void pull_request(final String extras){
+        isFinished = false;
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -25,7 +23,7 @@ public class ApiRequests {
                 try  {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                        .url(ApiConstants.api + url)
+                        .url(ApiConstants.betaUrl + extras)
                         .header("X-Application-Origin", "PyScout")
                         .header("X-TOA-Key", "dL5DVJ5oOPth7vtDJmZ1J3MetkNjcZ1PIyN0fgCxiiyx2kh7pEz13A==")
                         .build();
@@ -38,26 +36,26 @@ public class ApiRequests {
                     }
 
                     try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
                         Response = response.body().string();
                         Log.println(Log.ASSERT, "RESPONSE" , Response);
                     } catch (IOException e) {
                         e.printStackTrace();
                         Response = "Error";
                     }
-                                        output.setText(Response);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                isFinished = true;
             }
         });
 
         thread.start();
+    }
+
+    public String outputFromPull_request(){
+        String out = Response;
+        Response = "";
+        return out;
     }
 
 }

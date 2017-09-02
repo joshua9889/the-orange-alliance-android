@@ -1,5 +1,6 @@
 package org.theorangealliance.theorangealliance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.theorangealliance.theorangealliance.Api.ApiConstants;
 import org.theorangealliance.theorangealliance.Api.ApiRequests;
+import org.theorangealliance.theorangealliance.Event.EventActivity;
+import org.theorangealliance.theorangealliance.Settings.SettingsActivity;
+import org.theorangealliance.theorangealliance.Team.TeamActivity;
 
 import java.io.IOException;
 
@@ -26,10 +30,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TEAM_ACTIVITY = "org.theorangealliance.theorangealliance.Team.TEAMACTIVITY";
-    public TextView output;
 
-    ApiRequests api = new ApiRequests();
+    private Intent team_intent;
+    private Intent event_intent;
+    private Intent settings_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,34 +42,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        output  = (TextView)findViewById(R.id.Output);
-
-        final EditText apiRequestCode = (EditText) findViewById(R.id.API_Request);
-        apiRequestCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                apiRequestCode.setText("");
-            }
-        });
-
-        FloatingActionButton star = (FloatingActionButton) findViewById(R.id.str_button);
-        star.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Starred", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();
-            }
-        });
-
-        final Button call = (Button) findViewById(R.id.call);
-        call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String api_extras = apiRequestCode.getText().toString();
-                api.pull_request(api_extras, output);
-            }
-        });
-
+        team_intent = new Intent(this, TeamActivity.class);
+        event_intent = new Intent(this, EventActivity.class);
+        settings_intent = new Intent(this, SettingsActivity.class);
 
     }
 
@@ -80,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here.
         switch (item.getItemId()) {
-            case R.id.team_search_button:
-                if(output.getText() != "Hello"){
-                    output.setText("Hello");
-                }else {
-                    output.setText("Hello World!");
-                }
-
+            case R.id.menu_team_id:
+                this.startActivity(team_intent);
+                return true;
+            case R.id.menu_event_id:
+                this.startActivity(event_intent);
+                return true;
+            case R.id.menu_settings:
+                this.startActivity(settings_intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

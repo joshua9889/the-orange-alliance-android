@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:label="@string/activity_team" android:name=".Team.TeamActivity"/>
+        <activity android:label="@string/activity_events" android:name=".Event.EventActivity"/>
+        <activity android:label="@string/activity_setting" android:name=".Settings.SettingsActivity"/>
+
     </application>
 
 </manifest>
