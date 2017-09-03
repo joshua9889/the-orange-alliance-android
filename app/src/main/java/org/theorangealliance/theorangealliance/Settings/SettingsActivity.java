@@ -45,11 +45,22 @@ public class SettingsActivity extends AppCompatActivity {
         Beta = (RadioButton)findViewById(R.id.useBeta);
         Regular = (RadioButton)findViewById(R.id.useRegular);
         Button saveChanges = (Button) findViewById(R.id.Save_Button);
-        Regular.setChecked(true);
 
         //Saved Values
         X_App.setText(API_settings.getString("X_APP_NAME", "PyScout"));
         X_Key.setText(API_settings.getString("X_TOA_KEY", "dL5DVJ5oOPth7vtDJmZ1J3MetkNjcZ1PIyN0fgCxiiyx2kh7pEz13A=="));
+
+        switch (API_settings.getString("Server", "")){
+            case "Dev":
+                Dev.setChecked(true);
+                return;
+            case "Beta":
+                Beta.setChecked(true);
+                return;
+            case "Regular":
+                Regular.setChecked(true);
+                return;
+        }
 
         //Used when the Button "Save" is pressed
         main_intent = new Intent(this, MainActivity.class);

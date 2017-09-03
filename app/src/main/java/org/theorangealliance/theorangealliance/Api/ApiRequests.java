@@ -1,5 +1,7 @@
 package org.theorangealliance.theorangealliance.Api;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import java.io.IOException;
 
@@ -12,10 +14,29 @@ import okhttp3.Response;
  */
 
 public class ApiRequests {
+
     private String Response;
     private boolean isFinished;
-    public void pull_request(final String extras){
+
+    public void pull_request(final String extras, Context context){
         isFinished = false;
+        final SharedPreferences API_settings = context.getSharedPreferences("APIsettings" , Context.MODE_PRIVATE);
+        final String Url;
+
+        switch (API_settings.getString("Server", "")){
+            case "Dev":
+                Url = ApiConstants.devUrl;
+                return;
+            case "Beta":
+                Url = ApiConstants.betaUrl;
+                return;
+            case "Regular":
+                Url = ApiConstants.baseUrl;
+                return;
+            default:
+                Url = ApiConstants.baseUrl;
+        }
+
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -23,19 +44,15 @@ public class ApiRequests {
                 try  {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                        .url(ApiConstants.betaUrl + extras)
-                        .header("X-Application-Origin", "PyScout")
-                        .header("X-TOA-Key", "dL5DVJ5oOPth7vtDJmZ1J3MetkNjcZ1PIyN0fgCxiiyx2kh7pEz13A==")
+                        .url(Url + extras)
+                        .header("X-Application-Origin", API_settings.getString("X_APP_NAME", ""))
+                        .header("X-TOA-Key", API_settings.getString("X_TOA_KEY", ""))
                         .build();
 
                     Response response = null;
-                    try {
-                        response = client.newCall(request).execute();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
 
                     try {
+                        response = client.newCall(request).execute();
                         Response = response.body().string();
                         Log.println(Log.ASSERT, "RESPONSE" , Response);
                     } catch (IOException e) {
