@@ -47,20 +47,9 @@ public class SettingsActivity extends AppCompatActivity {
         Button saveChanges = (Button) findViewById(R.id.Save_Button);
 
         //Saved Values
-        X_App.setText(API_settings.getString("X_APP_NAME", "PyScout"));
-        X_Key.setText(API_settings.getString("X_TOA_KEY", "dL5DVJ5oOPth7vtDJmZ1J3MetkNjcZ1PIyN0fgCxiiyx2kh7pEz13A=="));
-
-        switch (API_settings.getString("Server", "")){
-            case "Dev":
-                Dev.setChecked(true);
-                return;
-            case "Beta":
-                Beta.setChecked(true);
-                return;
-            case "Regular":
-                Regular.setChecked(true);
-                return;
-        }
+        X_App.setText(API_settings.getString("X_APP_NAME", X_App.getText().toString()));
+        X_Key.setText(API_settings.getString("X_TOA_KEY", X_Key.getText().toString()));
+        Regular.setChecked(true);
 
         //Used when the Button "Save" is pressed
         main_intent = new Intent(this, MainActivity.class);
