@@ -20,22 +20,11 @@ public class ApiRequests {
 
     public void pull_request(final String extras, Context context){
         isFinished = false;
-        final SharedPreferences API_settings = context.getSharedPreferences("APIsettings" , Context.MODE_PRIVATE);
+        final SharedPreferences API_settings = context.getSharedPreferences("APIsettings", Context.MODE_PRIVATE);
+
         final String Url;
 
-        switch (API_settings.getString("Server", "")){
-            case "Dev":
-                Url = ApiConstants.devUrl;
-                return;
-            case "Beta":
-                Url = ApiConstants.betaUrl;
-                return;
-            case "Regular":
-                Url = ApiConstants.baseUrl;
-                return;
-            default:
-                Url = ApiConstants.baseUrl;
-        }
+        Url = ApiConstants.betaUrl;
 
         Thread thread = new Thread(new Runnable() {
 
@@ -70,9 +59,7 @@ public class ApiRequests {
     }
 
     public String outputFromPull_request(){
-        String out = Response;
-        Response = "";
-        return out;
+        return Response;
     }
 
 }
