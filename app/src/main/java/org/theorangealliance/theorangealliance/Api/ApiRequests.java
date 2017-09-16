@@ -20,11 +20,9 @@ public class ApiRequests {
 
     public void pull_request(final String extras, Context context){
         isFinished = false;
-        final SharedPreferences API_settings = context.getSharedPreferences("APIsettings", Context.MODE_PRIVATE);
-
         final String Url;
 
-        Url = ApiConstants.betaUrl;
+        Url = ApiConstants.liveUrl;
 
         Thread thread = new Thread(new Runnable() {
 
@@ -34,8 +32,8 @@ public class ApiRequests {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                         .url(Url + extras)
-                        .header("X-Application-Origin", API_settings.getString("X_APP_NAME", ""))
-                        .header("X-TOA-Key", API_settings.getString("X_TOA_KEY", ""))
+                        .header("X-Application-Origin", ApiConstants.apiApplicationName)
+                        .header("X-TOA-Key", ApiConstants.apiKey)
                         .build();
 
                     Response response = null;

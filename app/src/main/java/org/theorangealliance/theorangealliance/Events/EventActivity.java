@@ -1,11 +1,11 @@
-package org.theorangealliance.theorangealliance.Event;
+package org.theorangealliance.theorangealliance.Events;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import org.theorangealliance.theorangealliance.Api.ApiRequests;
 import org.theorangealliance.theorangealliance.R;
 
 /**

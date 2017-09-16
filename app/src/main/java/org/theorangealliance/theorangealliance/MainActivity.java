@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.MovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.theorangealliance.theorangealliance.Api.ApiRequests;
-import org.theorangealliance.theorangealliance.Event.EventActivity;
+import org.theorangealliance.theorangealliance.Events.EventActivity;
 import org.theorangealliance.theorangealliance.Settings.SettingsActivity;
 import org.theorangealliance.theorangealliance.Team.TeamActivity;
 
@@ -114,11 +112,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_event_id:
                 loop = false;
                 this.startActivity(event_intent);
-                return true;
-
-            case R.id.menu_settings:
-                loop = false;
-                this.startActivity(settings_intent);
                 return true;
 
             default:

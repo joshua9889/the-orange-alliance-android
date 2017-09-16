@@ -20,6 +20,15 @@ import org.theorangealliance.theorangealliance.R;
  * X_APP and X_Key are the given by the TOA
  *
  * Radio Buttons modify which server to use. Default is Regular.
+ *
+ * put this in menu_main.xml
+ * <item
+ android:id="@+id/menu_settings"
+ android:orderInCategory="300"
+ android:title="@string/menu_settings"
+ app:showAsAction="never"/>
+ *
+ *
  */
 
 public class SettingsActivity extends AppCompatActivity {
