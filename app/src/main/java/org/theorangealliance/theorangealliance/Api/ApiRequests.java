@@ -1,7 +1,6 @@
 package org.theorangealliance.theorangealliance.Api;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import java.io.IOException;
 
@@ -22,7 +21,7 @@ public class ApiRequests {
         isFinished = false;
         final String Url;
 
-        Url = ApiConstants.liveUrl;
+        Url = ApiConstants.api;
 
         Thread thread = new Thread(new Runnable() {
 
@@ -43,7 +42,7 @@ public class ApiRequests {
                         Response = response.body().string();
                         Log.println(Log.ASSERT, "RESPONSE" , Response);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Log.println(Log.ASSERT, "Error", e.toString());
                         Response = "Error";
                     }
                 } catch (Exception e) {

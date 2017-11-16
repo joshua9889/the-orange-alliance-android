@@ -19,6 +19,9 @@ import org.theorangealliance.theorangealliance.Events.EventActivity;
 import org.theorangealliance.theorangealliance.Settings.SettingsActivity;
 import org.theorangealliance.theorangealliance.Team.TeamActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Intent team_intent, event_intent, settings_intent;
@@ -121,5 +124,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void update(){
         output.setText(api.outputFromPull_request());
+    }
+
+    public void storageForTeamList() {
+        SharedPreferences teamList = this.getSharedPreferences("TeamList" , Context.MODE_PRIVATE);
+        ArrayList<List> teamArray = new ArrayList<>();
+
+        api.pull_request("/teams/", getApplicationContext());
     }
 }

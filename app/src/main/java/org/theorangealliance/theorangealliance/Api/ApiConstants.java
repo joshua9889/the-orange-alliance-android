@@ -7,16 +7,21 @@ package org.theorangealliance.theorangealliance.Api;
  */
 
 public class ApiConstants {
+    //Api Key
+    public static String apiApplicationName = "PyScout";
+    public static String apiKey = "dL5DVJ5oOPth7vtDJmZ1J3MetkNjcZ1PIyN0fgCxiiyx2kh7pEz13A==";
+
     //Base URLs
-    public static String baseUrl = "https://www.theorangealliance.org";
-    public static String betaUrl = "https://beta.theorangealliance.org";
-    public static String devUrl = "https://dev.theyellowalliance.com";
+    public static String v2Url = "http://theorangealliance.org/apiv2";
+    private static String v1Url = "https://www.theorangealliance.org";
+    private static String betaUrl = "https://beta.theorangealliance.org";
+    private static String devUrl = "https://dev.theyellowalliance.com";
 
     public static String TOA_App_Origin = "X-Application_Origin";
     public static String TOA_Key = "X-TOA-Key";
 
     //The base route for accessing anything inside of TOA API. Also returns API version.
-    public static String api = "/api";
+    public static String api = betaUrl;
 
     //Retrieve all available event-types types.
     public static String eventTypes = api + "/event-types";
@@ -82,7 +87,7 @@ public class ApiConstants {
 
     /**
      *
-     * @param event_key in the form '
+     * @param event_key in the form
      * @return
      */
     public static String awardData(String event_key){
